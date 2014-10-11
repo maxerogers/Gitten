@@ -4,7 +4,9 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel='stylesheet' href='/css/bootstrap.min.css'>
-</head>
+  <script src="./js/jquery.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  </head>
 
 <body>
 
@@ -33,12 +35,18 @@
                 </li>
                 <li><a href="#">Log Out</a>
                 </li>
-              <% else %>
-                <li><a href="#">Log In</a>
-                </li>
-                <li><a href="#">Sign Up</a>
+                <% else %>
+                  <li>
+                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#logIn">
+                      Log In
+                    </button>
                   </li>
-              <% end %>
+                  <li>
+                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signUp">
+                      Sign Up
+                    </button>
+                  </li>
+                  <% end %>
             </ul>
           </li>
         </ul>
@@ -49,130 +57,158 @@
   </nav>
 
   <div class="container">
-  <% if session[:current_user_id] %>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="panel panel-primary">
-          <div class="panel-heading">User Info</div>
-          <div class="panel-body">
-            I am Cat God. Worship. Pls.
+    <% if session[:current_user_id] %>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel panel-primary">
+            <div class="panel-heading">User Info</div>
+            <div class="panel-body">
+              I am Cat God. Worship. Pls.
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">Followers Commit Feed</div>
-          <table class="table">
-            <tr>
-              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-            </tr>
-            <tr>
-              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-            </tr>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">Followers Commit Feed</div>
+            <table class="table">
+              <tr>
+                <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+              </tr>
+              <tr>
+                <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+              </tr>
 
-            <tr>
-              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-            </tr>
-            <tr>
-              <td><strong>SUPER-REPO</strong> moar commit</td>
-            </tr>
-            <tr>
-              <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-            </tr>
+              <tr>
+                <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+              </tr>
+              <tr>
+                <td><strong>SUPER-REPO</strong> moar commit</td>
+              </tr>
+              <tr>
+                <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
+              </tr>
 
-            <tr>
-              <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-
-      <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">Global Commit Feed</div>
-          <table class="table">
-            <tr>
-              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-            </tr>
-            <tr>
-              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-            </tr>
-            <tr>
-              <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
-            </tr>
-            <tr>
-              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-            </tr>
-            <tr>
-              <td><strong>SUPER-REPO</strong> moar commit</td>
-            </tr>
-            <tr>
-              <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-            </tr>
-
-            <tr>
-              <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
-            </tr>
-            <tr>
-              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-            </tr>
-            <tr>
-              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-            </tr>
-            <tr>
-              <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
-            </tr>
-            <tr>
-              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-            </tr>
-          </table>
+              <tr>
+                <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
+              </tr>
+            </table>
+          </div>
         </div>
 
-      </div>
 
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">Global Commit Feed</div>
+            <table class="table">
+              <tr>
+                <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+              </tr>
+              <tr>
+                <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+              </tr>
+              <tr>
+                <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
+              </tr>
+              <tr>
+                <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+              </tr>
+              <tr>
+                <td><strong>SUPER-REPO</strong> moar commit</td>
+              </tr>
+              <tr>
+                <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
+              </tr>
 
+              <tr>
+                <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
+              </tr>
+              <tr>
+                <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+              </tr>
+              <tr>
+                <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+              </tr>
+              <tr>
+                <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
+              </tr>
+              <tr>
+                <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+              </tr>
+            </table>
+          </div>
 
-    </div>
-  <% else %>
-    <div class="row">
-      <div class="col-md-3">
-        <p>wow gitten</p>
-      </div>
-      <div class="col-md-9">
-        <div class="panel panel-default">
-          <div class="panel-heading">Commit Feed</div>
-          <table class="table">
-            <tr>
-              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-            </tr>
-            <tr>
-              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-            </tr>
-
-            <tr>
-              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-            </tr>
-            <tr>
-              <td><strong>SUPER-REPO</strong> moar commit</td>
-            </tr>
-            <tr>
-              <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-            </tr>
-
-            <tr>
-              <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
-            </tr>
-          </table>
         </div>
+
+
+
       </div>
-    </div>
-  <% end %>
+      <% else %>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="jumbotron">
+              <h1>Hello, Kitten!</h1>
+              <p>Imagine Twitter for your GitHub repos. Mew away with your friends and favorite projects!</p>
+              <p><a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#signUp">Sign Up!</a>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Global Commit Feed</div>
+              <table class="table">
+                <tr>
+                  <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+                </tr>
+                <tr>
+                  <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+                </tr>
+
+                <tr>
+                  <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+                </tr>
+                <tr>
+                  <td><strong>SUPER-REPO</strong> moar commit</td>
+                </tr>
+                <tr>
+                  <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
+                </tr>
+
+                <tr>
+                  <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <% end %>
   </div>
 
 
   <div class="modal fade" id="logIn">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+  <div class="modal fade" id="signUp">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
