@@ -33,12 +33,18 @@
             </li>
             <li><a href="#">Log Out</a>
             </li>
-          <% else %>
-            <li><a href="#">Log In</a>
-            </li>
-            <li><a href="#">Sign Up</a>
-            </li>
-          <% end %>
+            <% else %>
+              <li>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#logIn">
+                  Log In
+                </button>
+              </li>
+              <li>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signUp">
+                  Sign Up
+                </button>
+              </li>
+              <% end %>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -157,6 +163,8 @@
       </div>
 
     </div>
+
+    
 
 
   </div>
