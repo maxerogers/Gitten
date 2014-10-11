@@ -1,0 +1,87 @@
+<!Doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Gitten</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <% if session[:current_user_id] %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">meow meow<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Log In</a></li>
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+          <% else %>
+          <!-- Button trigger modal -->
+            <button class="btn btn-lg btn-link" data-toggle="modal" data-target="#myModal">
+              Login
+            </button>
+          <% end %>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Welcome to Gitten</h4>
+        <%= flash[:notice] %>
+      </div>
+      <div class="login_form_div">
+        <form id="login_form"class="form-horizontal" role="form">
+          <div class="modal-body">
+            <input id="login_email" class="form-control input-lg" type="text" name="email" placeholder="Email/Username">
+            <input id="login_password" class="form-control input-lg" type="password" name="password" placeholder="Password">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" type="button" id="switch_signup_btn">Signup?</button>
+            <button class="btn btn-primary" id= "login_btn" type="button">Login</button>
+          </div>
+        </form>
+      </div>
+      <div class="signup_form_div">
+        <form id="sign_up_form" role="form">
+          <div class="modal-body">
+            <input class="form-control input-lg" type="text" name="email" placeholder="Email">
+            <input class="form-control input-lg" type="text" name="username" placeholder="Username">
+            <input class="form-control input-lg" type="password" name="password" placeholder="Password">
+            <input class="form-control input-lg" type="password" name="password_confirm" placeholder="Password Confirm">
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" type="button" id="switch_login_btn">Want to Login?</button>
+            <button class="btn btn-primary" id= "signup_btn" type="button">Signup</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= yield %>
+<script src="js/index.js"></script>
+</body>
+</html>

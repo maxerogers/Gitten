@@ -1,69 +1,36 @@
 $("#signup_btn").click(function(){
-  var email_ok = false;
-  var user_name_ok = false;
-  var password_ok = false;
-  $("#signup_btn").hide();
-  $("#login_form").hide();
-  $("#sign_up_form").show();
-  $("#sign_up_form input[type='submit']").attr('disabled','disabled');
-  $( "#sign_up_form input[name='email']" ).focusout(function() {
-      json = {};
-      json.email = $( "#sign_up_form input[name='email']" ).val();
-      $.get("/email_available",json,function(data){
-        if(data["message"] == "yes"){
-          email_ok = true;
-          console.log("Acceptable Email");
-          if(email_ok && user_name_ok && password_ok){
-            $("#sign_up_form input[type='submit']").removeAttr('disabled');
-          }
-        }else{
-          email_ok = false;
-          console.log("Error, Email is taken");
-        }
-      });
-  });
-  $( "#sign_up_form input[name='username']" ).focusout(function() {
-      json = {};
-      json.user_name = $( "#sign_up_form input[name='username']" ).val();
-      $.get("/user_name_available",json,function(data){
-        if(data["message"] == "yes"){
-          user_name_ok = true;
-          console.log("Acceptable Username");
-          if(email_ok && user_name_ok && password_ok){
-            $("#sign_up_form input[type='submit']").removeAttr('disabled');
-          }
-        }else{
-          user_name_ok = false;
-          console.log("Error, Username is taken");
-        }
-      });
-  });
-  $( "#sign_up_form input[name='password']" ).focusout(function() {
-      //$("#")
+});
 
-      if($("#sign_up_form input[name='password']").val() === $("#sign_up_form input[name='password_confirm']").val()){
-        password_ok = true;
-      }else{
-        password_ok = false;
-      }
-      if(email_ok && user_name_ok && password_ok){
-        $("#sign_up_form input[type='submit']").removeAttr('disabled');
-      }else{
-        $("#sign_up_form input[type='submit']").attr('disabled','disabled');
-      }
-  });
-  $( "#sign_up_form input[name='password_confirm']" ).focusout(function() {
-      //alert( "Handler for focusout called." );
-      if($("#sign_up_form input[name='password']").val() === $("#sign_up_form input[name='password_confirm']").val()){
-        password_ok = true;
-      }else{
-        password_ok = false;
-      }
-      if(email_ok && user_name_ok && password_ok){
-        $("#sign_up_form input[type='submit']").removeAttr('disabled');
-      }else{
-        $("#sign_up_form input[type='submit']").attr('disabled','disabled');
-      }
+$("#login_btn").click(function(){
+  var json = {};
+  json.email = $("#login_email").val();
+  json.password = $("#login_password").val();
+  console.log(json);
+  $.post("/login",json,function(data){
+    var json = jQuery.parseJSON(data);
+    if(json["message"] === "yes"){
+      //move to another page
+      window.location.href = "/repo";
+    }else{
+      $(".login_form_div").addClass("has-error");
+    }
   });
 });
-$("#sign_up_form").hide();
+
+$("#switch_signup_btn").click(function(){
+  $(".login_form_div").hide();
+  $(".signup_form_div").show();
+});
+
+$("#switch_login_btn").click(function(){
+  $(".login_form_div").show();
+  $(".signup_form_div").hide();
+});
+
+$(".signup_form_div").hide();
+
+$("#login_password").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#login_btn").click();
+    }
+});

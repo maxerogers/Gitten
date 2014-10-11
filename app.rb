@@ -23,14 +23,18 @@ end
 
 post '/login' do
   puts params.inspect
-  if User.where("email = ? OR user_name = ?", params[:email], params[:email]).first.try(:authenticate, params[:password])
-    return erb :repo
+  json = {message: "no"}
+  if User.where("user_name = ? OR email = ?",params[:email],params[:email]).first.try(:authenticate, params[:password])
+    json[:message] = "yes"
   end
-  flash[:notice] = "Incorrect Email/Username and Password combination"
-  erb :index
+  json.to_json
 end
 
 post '/signup' do
+  puts params.inspect
+end
+
+post "/signout" do
   puts params.inspect
 end
 
