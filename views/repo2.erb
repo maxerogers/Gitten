@@ -9,49 +9,6 @@
 </head>
 
 <body>
-
-  <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Gitten</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-          <% if session[:current_user_id] %>
-            <li><a href="#">My Projects</a>
-            </li>
-            <li><a href="#">Settings?</a>
-            </li>
-            <li><a href="#">Log Out</a>
-            </li>
-            <% else %>
-              <li>
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#logIn">
-                  Log In
-                </button>
-              </li>
-              <li>
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signUp">
-                  Sign Up
-                </button>
-              </li>
-              <% end %>
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-  </nav>
-
   <div class="container">
     <div class="row">
       <div class="col-md-8">
@@ -164,7 +121,7 @@
 
     </div>
 
-    
+
 
 
   </div>
