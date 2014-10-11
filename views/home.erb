@@ -1,5 +1,6 @@
 <!Doctype html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel='stylesheet' href='/css/bootstrap.min.css'>
@@ -7,140 +8,156 @@
 
 <body>
 
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Gitten</a>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Gitten</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <ul class="nav navbar-nav">
+              <% if session[:current_user_id] %>
+                <li><a href="#">My Projects</a>
+                </li>
+                <li><a href="#">Settings?</a>
+                </li>
+                <li><a href="#">Log Out</a>
+                </li>
+              <% else %>
+                <li><a href="#">Log In</a>
+                </li>
+                <li><a href="#">Sign Up</a>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container-fluid -->
+  </nav>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">meow meow<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Log In</a></li>
-            <li><a href="#">Sign Up</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+  <div class="container">
 
-<div class="container">
-
-  <div class="row">
-   <div class="col-md-3">
-     <div class="panel panel-primary">
-        <div class="panel-heading">User Info</div>
-        <div class="panel-body">
-          I am Cat God. Worship. Pls.
+    <div class="row">
+      <div class="col-md-3">
+        <div class="panel panel-primary">
+          <div class="panel-heading">User Info</div>
+          <div class="panel-body">
+            I am Cat God. Worship. Pls.
+          </div>
         </div>
-     </div>
-   </div>
+      </div>
 
-    <div class="col-md-4">
-    <div class="panel panel-default">
-     <div class="panel-heading">Followers Feed</div>
-  <table class="table">
-  <tr>
-    <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-  </tr>
-  <tr>
-    <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-  </tr>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Followers Feed</div>
+          <table class="table">
+            <tr>
+              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+            </tr>
+            <tr>
+              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+            </tr>
 
-  <tr>
-    <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-  </tr>
-  <tr>
-    <td><strong>SUPER-REPO</strong> moar commit</td>
-  </tr>
-  <tr>
-    <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-  </tr>
+            <tr>
+              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+            </tr>
+            <tr>
+              <td><strong>SUPER-REPO</strong> moar commit</td>
+            </tr>
+            <tr>
+              <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
+            </tr>
 
-  <tr>
-    <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
-  </tr>
-  </table>
+            <tr>
+              <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Global Feed</div>
+          <table class="table">
+            <tr>
+              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+            </tr>
+            <tr>
+              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+            </tr>
+            <tr>
+              <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
+            </tr>
+            <tr>
+              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+            </tr>
+            <tr>
+              <td><strong>SUPER-REPO</strong> moar commit</td>
+            </tr>
+            <tr>
+              <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
+            </tr>
+
+            <tr>
+              <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
+            </tr>
+            <tr>
+              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+            </tr>
+            <tr>
+              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+            </tr>
+            <tr>
+              <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
+            </tr>
+            <tr>
+              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+
+
     </div>
-    </div>
-
-
-    <div class="col-md-4">
-    <div class="panel panel-default">
-     <div class="panel-heading">Global Feed</div>
-  <table class="table">
-    <tr>
-      <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-    </tr>
-    <tr>
-      <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-    </tr>
-<tr>
-  <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
-</tr>
-    <tr>
-      <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-    </tr>
-    <tr>
-      <td><strong>SUPER-REPO</strong> moar commit</td>
-    </tr>
-    <tr>
-      <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-    </tr>
-
-    <tr>
-      <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
-    </tr>
-    <tr>
-      <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-    </tr>
-    <tr>
-      <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-    </tr>
-<tr>
-  <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
-</tr>
-    <tr>
-      <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-    </tr>
-  </table>
-    </div>
-
-    </div>
-
-
-
   </div>
-</div>
 
 
-<div class="modal fade" id="logIn">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title">Modal title</h4>
+  <div class="modal fade" id="logIn">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>One fine body&hellip;</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
 </body>
