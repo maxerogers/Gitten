@@ -37,7 +37,7 @@
                 <li><a href="#">Log In</a>
                 </li>
                 <li><a href="#">Sign Up</a>
-                </li>
+                  </li>
               <% end %>
             </ul>
           </li>
@@ -49,7 +49,7 @@
   </nav>
 
   <div class="container">
-
+  <% if session[:current_user_id] %>
     <div class="row">
       <div class="col-md-3">
         <div class="panel panel-primary">
@@ -62,7 +62,7 @@
 
       <div class="col-md-4">
         <div class="panel panel-default">
-          <div class="panel-heading">Followers Feed</div>
+          <div class="panel-heading">Followers Commit Feed</div>
           <table class="table">
             <tr>
               <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
@@ -91,7 +91,7 @@
 
       <div class="col-md-4">
         <div class="panel panel-default">
-          <div class="panel-heading">Global Feed</div>
+          <div class="panel-heading">Global Commit Feed</div>
           <table class="table">
             <tr>
               <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
@@ -135,6 +135,40 @@
 
 
     </div>
+  <% else %>
+    <div class="row">
+      <div class="col-md-3">
+        <p>wow gitten</p>
+      </div>
+      <div class="col-md-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">Commit Feed</div>
+          <table class="table">
+            <tr>
+              <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+            </tr>
+            <tr>
+              <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
+            </tr>
+
+            <tr>
+              <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
+            </tr>
+            <tr>
+              <td><strong>SUPER-REPO</strong> moar commit</td>
+            </tr>
+            <tr>
+              <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
+            </tr>
+
+            <tr>
+              <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% end %>
   </div>
 
 
