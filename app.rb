@@ -55,3 +55,12 @@ get '/user_name_available' do
     return {message: "no"}.to_json
   end
 end
+
+
+get "/home" do
+  erb :home
+end
+
+get "/repo2" do
+  erb :repo2
+end
