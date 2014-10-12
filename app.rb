@@ -14,8 +14,7 @@ configure do
 end
 
 get '/' do
-
-  erb :index
+  redirect to("/home")
 end
 
 get "/repo" do
