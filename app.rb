@@ -104,15 +104,15 @@ get "/repo2" do
 end
 
 get "/user/:id" do
-  user = User.find(params[:id])
+  @user = User.find(params[:id])
   "Hello, #{user.user_name}!"
 end
 
 
 get "/repo/:id" do
-  repo = Repo.find(params[:id])
+  @repo = Repo.find(params[:id])
   "Hello, #{params[:id]}!"
-  erb :repo2
+  erb :repo2, :locals => {:test => 1}
 end
 
 

@@ -5,13 +5,17 @@
       <div class="row">
         <div class="col-md-3">
           <div class="panel panel-primary">
-            <div class="panel-heading"><%= @user.user_name %></div>
+            <div class="panel-heading"><h2><%= @user.user_name %></h2></div>
             <div class="panel-body">
-              I am Cat God. Worship. Pls.
+              <h4><%= @user.email %></h4>
               <ul>
-                <li>Username: <%= @user.user_name%></li>
-                <li> <%= test%></li>
+                <% @user.repos.each do |r| %>
+                  <li>
+                    <a href="/repo/<%= r.id %>"> <strong><%= r.title %></strong> <%= r.blurb %> </a>
+                  </li>
+                <% end %>
               </ul>
+
             </div>
           </div>
         </div>
