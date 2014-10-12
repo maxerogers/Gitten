@@ -40,11 +40,11 @@
               <li><a href="/signout"> Signout</a> </li>
               <% end %>
         </ul>
-        <form class="navbar-form navbar-right" role="search">
+        <form class="navbar-form navbar-right" action="/search" method="post" role="search">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" placeholder="Search" name="search">
             <span class="input-group-btn">
-            <button class="btn btn-default" type="button"><span class="fa fa-search"></span>
+            <button class="btn btn-default"><span class="fa fa-search"></span>
             </button>
             </span>
           </div>

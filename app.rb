@@ -227,6 +227,30 @@ post '/repo/:id/delete' do
   end
 end
 
+post "/search" do
+  @search_params = params[:search]
+  search_strs = @search_params.split(",")
+  repos = []
+  search_strs.each do |str|
+    tag = Tag.where(name: str).first
+    puts tag.inspect
+    repos.push tag.repos unless tag.nil?
+  end
+  @repos = nil
+  repos.each do |r|
+    if @repos.nil?
+      @repos = r
+    else
+      @repos.concat r
+    end
+  end
+  @repos = @repos.uniq
+  @repos_sort = {}
+  @repos.each { |repo| @repos_sort[repo] = repo.us.count }
+  #@repos = @repos_sort.sort_by {|_key, value| value}
+  @mews = []
+  erb :search
+end
 peon = Rufus::Scheduler.new
 if ARGV[0] == "peon"
   peon.in '10s' do

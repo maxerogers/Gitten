@@ -6,7 +6,7 @@
           <div class="col-md-12">
             <h1><%= @repo.title.capitalize %></h1>
             <h2><%= @repo.user.user_name.capitalize %></h2>
-            <h3> Full Name + <%= @repo.user.email%> + Website</h3>
+            <h3> Full Name + <a href="mailto:<%= @repo.user.email%>"><%= @repo.user.email%></a> + Website</h3>
           </div>
         </div>
         <div class="row">

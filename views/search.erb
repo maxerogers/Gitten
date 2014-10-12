@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="md-4"></div>
+    <div class="md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Related Repos for {<%= @search_params %>}</div>
+        <table class="table">
+          <% @repos.each do |repo| %>
+            <tr>
+              <td><strong><a href="/repo/<%= repo.id %>"><%= repo.title%></a></strong>:<%= repo.date_location%>: <%= repo.tag_string%></td>
+            </tr>
+            <% @mews.push repo.mews %>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Related Mews for {<%= @search_params %>}</div>
+        <table class="table">
+          <% if false %>
+            <tr>
+              <td><strong><%= mew.get_time%></strong> <a href="/repo/<%= mew.repo.id %>"><%= mew.repo.title.capitalize %></a>-<%= mew.author%>: "<%= mew.message%>"</td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

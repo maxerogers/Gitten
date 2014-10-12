@@ -201,3 +201,9 @@ $("#delete_repo_btn").click(function(){
     }
   });
 });
+
+$(".edit_form input").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#edit_repo_btn").click();
+    }
+});
