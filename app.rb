@@ -44,8 +44,10 @@ post '/signup' do
   json.to_json
 end
 
-post "/signout" do
+get "/signout" do
   puts params.inspect
+  session[:current_user] = nil
+  redirect back
 end
 
 get '/email_available' do

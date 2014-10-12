@@ -1,0 +1,17 @@
+U:2ActiveRecord::ConnectionAdapters::SchemaCache[
+l+fPÑqQ{I"schema_migrations:ET[o:4ActiveRecord::ConnectionAdapters::SQLite3Column:
+@nameI"version;T:@sql_typeI"varchar(255);T:
+@nullF:@limitiÿ:@precision0:@scale0:
+@type:string:@default0:@default_function0:@primary0:@coder0I"
+users;T[o;;I"id;T;	I"INTEGER;T;
+F;0;0;0;:integer;0;0;0;0o;;I"
+email;T;	I"varchar(255);T;
+T;iÿ;0;0;;;0;0;0;0o;;I"user_name;T;	I"varchar(255);T;
+T;iÿ;0;0;;;0;0;0;0o;;I"password_digest;T;	I"varchar(255);T;
+T;iÿ;0;0;;;0;0;0;0o;;I"created_at;T;	I"datetime;T;
+T;0;0;0;:datetime;0;0;0;0o;;I"updated_at;T;	I"datetime;T;
+T;0;0;0;;;0;0;0;0{I"schema_migrations;T{I"version;T@I"
+users;T{I"id;T@I"
+email;T@I"user_name;T@I"password_digest;T@I"created_at;T@I"updated_at;T@{I"schema_migrations;T0I"
+users;TI"id;T{I"schema_migrations;TTI"
+users;TT
