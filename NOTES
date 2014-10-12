@@ -13,3 +13,8 @@ Always make sure your in rerun. Otherwise your app server doesn't update
 use $ lsof -i TCP:4567
 and then use kill __PROCESS_ID__
 to find rogue server processes
+
+#HElpful tip#4
+When using rufus to run a demon make sure to 1. increase the available database pool
+2. user Rack::Session::Pool instead of enable: :sessions
+It has avoided the 'Cookie over 4k' error I was getting

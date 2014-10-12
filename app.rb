@@ -11,7 +11,7 @@ require_all 'config' #database configuration
 require_all 'models' #model loads
 
 configure do
-  enable :sessions
+  use Rack::Session::Pool
   set :session_secret, "My session secret"
   $github_id = 'c57c82472c219e5c4e6b'
   $github_secret = '4c4b45a2bc3ccd12b73860a204834382662035d9'
@@ -21,6 +21,8 @@ configure do
     provider :github, $github_id, $github_secret
   end
 end
+
+after { ActiveRecord::Base.connection.close }
 
 get '/auth/github/callback' do
     env['omniauth.auth']
