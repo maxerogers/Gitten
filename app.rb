@@ -55,8 +55,10 @@ end
 post '/signup' do
   puts params.inspect
   json = {message: "no"}
-  user = User.create(user_name: params[:user_name],email: params[:email],password: params[:password],  password_confirmation: params[:password_confirm])
+  user = User.create(user_name: params[:username],email: params[:email],password: params[:password],  password_confirmation: params[:password_confirm])
+  puts user.inspect
   if user
+    puts "I MADE A USER!!!"
     session[:current_user] = user
     json[:message] = "yes"
   end
