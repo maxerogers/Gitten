@@ -1,4 +1,96 @@
+
+var email_okay = false;
+var password_okay = false;
+var username_okay = false;
+
+function signup_btn(){
+  if(email_okay == true && password_okay == true&& username_okay == true){
+    $('#signup_btn').prop('disabled', false);
+  }
+}
+
+$("#sign_up_form .modal-body input[name='email']").focusout(function(){
+  var json = {};
+  json.email = $("#sign_up_form .modal-body input[name='email']").val();
+  $.get("/email_available",json,function(data){
+    if(data["message"] === "yes"){
+      $("#email_error_message").hide();
+      email_okay = true;
+      signup_btn();
+    }else{
+      $("#email_error_message").show();
+      $('#signup_btn').prop('disabled', true);
+      email_okay = false;
+    }
+  });
+});
+$("#sign_up_form .modal-body input[name='username']").focusout(function(){
+  var json = {}
+  json.user_name = $("#sign_up_form .modal-body input[name='username']").val();
+  $.get("/user_name_available",json,function(data){
+    if(data["message"] === "yes"){
+      $("#username_error_message").hide();
+      username_okay = true;
+      signup_btn();
+    }else{
+      $("#username_error_message").show();
+      $('#signup_btn').prop('disabled', true);
+      username_okay = false;
+    }
+  });
+});
+
+function check_passwords(){
+  console.log("RWAR");
+  if($("#sign_up_form .modal-body input[name='password']").val() === $("#sign_up_form .modal-body input[name='password_confirm']").val()){
+    $("#password_error_message").hide();
+    password_okay = true;
+    signup_btn();
+  }else{
+    $("#password_error_message").show();
+    $('#signup_btn').prop('disabled', true);
+    password_okay = false;
+  }
+}
+
+$("#sign_up_form .modal-body input[name='password']").focusout(function(){
+  check_passwords();
+});
+$("#sign_up_form .modal-body input[name='password_confirm']").focusout(function(){
+  check_passwords();
+});
+
+
+
 $("#signup_btn").click(function(){
+  var json = {};
+  var okay = true;
+  json.email = $("#sign_up_form .modal-body input[name='email']").val();
+  json.username = $("#sign_up_form .modal-body input[name='username']").val();
+  json.password = $("#sign_up_form .modal-body input[name='password']").val();
+  json.password_confirm = $("#sign_up_form .modal-body input[name='password_confirm']").val();
+  if(json.email === "Email" || json.email === ""){
+    $("#email_error_message").show();
+    okay = false;
+  }
+  if(json.username === "Username" || json.email === ""){
+    $("#username_error_message").show();
+    okay = false;
+  }
+  if(json.password === ""){
+    $("#password_error_message").show();
+    okay = false;
+  }
+  if(okay){
+    $.post("/signup",json,function(data){
+      var json = jQuery.parseJSON(data);
+      if(json["message"] === "yes"){
+        window.location.href = "/home";
+      }else{
+        $(".signup_form_div").addClass("has-error");
+      }
+    });
+  }
 });
 
 $("#login_btn").click(function(){
@@ -9,8 +101,7 @@ $("#login_btn").click(function(){
   $.post("/login",json,function(data){
     var json = jQuery.parseJSON(data);
     if(json["message"] === "yes"){
-      //move to another page
-      window.location.href = "/repo";
+      window.location.href = "/home";
     }else{
       $(".login_form_div").addClass("has-error");
     }
@@ -18,13 +109,20 @@ $("#login_btn").click(function(){
 });
 
 $("#switch_signup_btn").click(function(){
+  console.log("RWAR");
   $(".login_form_div").hide();
   $(".signup_form_div").show();
+  $("#email_error_message").hide();
+  $("#username_error_message").hide();
+  $("#password_error_message").hide();
 });
 
 $("#switch_login_btn").click(function(){
   $(".login_form_div").show();
   $(".signup_form_div").hide();
+  $("#email_error_message").hide();
+  $("#username_error_message").hide();
+  $("#password_error_message").hide();
 });
 
 $(".signup_form_div").hide();
@@ -32,5 +130,15 @@ $(".signup_form_div").hide();
 $("#login_password").keyup(function(event){
     if(event.keyCode == 13){
         $("#login_btn").click();
+    }
+});
+
+$("#email_error_message").hide();
+$("#username_error_message").hide();
+$("#password_error_message").hide();
+
+$("#sign_up_form input").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#signup_btn").click();
     }
 });

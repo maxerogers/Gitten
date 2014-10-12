@@ -1,0 +1,6 @@
+Today I learned
+
+Sinatra can return a json object with $.get will recognize as a json if you include
+content_type :json
+
+before its submitted

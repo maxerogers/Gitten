@@ -24,7 +24,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <% if session[:current_user_id] %>
+          <% if session[:current_user] %>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">meow meow<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Log In</a></li>
@@ -50,6 +50,9 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Welcome to Gitten</h4>
         <%= flash[:notice] %>
+        <span class="text-danger" id="username_error_message">Username Taken</span>
+        <span class="text-danger" id="email_error_message">Email Taken</span>
+        <span class="text-danger" id="password_error_message">Passwords don't match</span>
       </div>
       <div class="login_form_div">
         <form id="login_form"class="form-horizontal" role="form">
@@ -66,10 +69,10 @@
       <div class="signup_form_div">
         <form id="sign_up_form" role="form">
           <div class="modal-body">
-            <input class="form-control input-lg" type="text" name="email" placeholder="Email">
-            <input class="form-control input-lg" type="text" name="username" placeholder="Username">
-            <input class="form-control input-lg" type="password" name="password" placeholder="Password">
-            <input class="form-control input-lg" type="password" name="password_confirm" placeholder="Password Confirm">
+            <input id="signup_email" class="form-control input-lg" type="text" name="email" placeholder="Email">
+            <input id="signup_username" class="form-control input-lg" type="text" name="username" placeholder="Username">
+            <input id="signup_password" class="form-control input-lg" type="password" name="password" placeholder="Password">
+            <input id="signup_password_confirm" class="form-control input-lg" type="password" name="password_confirm" placeholder="Password Confirm">
           </div>
           <div class="modal-footer">
             <button class="btn btn-default" type="button" id="switch_login_btn">Want to Login?</button>
