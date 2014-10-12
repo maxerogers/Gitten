@@ -6,6 +6,7 @@ require 'sinatra/activerecord'
 require 'bcrypt'
 require 'omniauth-github'
 require 'httparty'
+require 'rufus-scheduler'
 require_all 'config' #database configuration
 require_all 'models' #model loads
 
@@ -100,13 +101,29 @@ get "/user/:id" do
   "Hello, #{user.user_name}!"
 end
 
+def gen_mews(repo)
+  #curl -i 'https://api.github.com/repos/honeycodedbear/gitter/compare/aa5a8bd2c5f5b648ab84344ee3fe90457a3dbb25...b8262a36c765127924b5c424005a695fde02298c?client_id=5394720ddae7b4107128&client_secret=96a96f7a666b4dfa0708a881c56edac9c702dbb0'
+  #curl -i 'https://api.github.com/repos/honeycodedbear/gitter/compare/aa5a8bd2c5f5b648ab84344ee3fe90457a3dbb25...b8262a36c765127924b5c424005a695fde02298c?client_id=5394720ddae7b4107128&client_secret=96a96f7a666b4dfa0708a881c56edac9c702dbb0'
+  Mew.where(repo: repo).delete_all
+  repoStrs = repo.repo_link.split("/")
+  owner = repoStrs[3]
+  repo_name = repoStrs[4].split(".")[0]
+  url = "https://api.github.com/repos/#{owner}/#{repo_name}"
+  #HTTParty.get("")
+  response = HTTParty.get("#{url}/commits?client_id=#{$github_id}&client_secret=#{$github_secret}", headers: {"User-Agent" => 'gitten', "Accept" => "application/vnd.github.v3+json"})
+  #puts response.body, response.code, response.message, response.headers.inspect
+  jsons = JSON.parse(response.body)
+  jsons.each do |json|
+    Mew.create(time_string: json["commit"]["committer"]["date"], message: json["commit"]["message"], author: json["commit"]["author"]["name"], repo_id: repo.id)
+  end
+end
 
 get "/repo/:id" do
   @repo = Repo.find(params[:id])
   repoStrs = @repo.repo_link.split("/")
   owner = repoStrs[3]
-  repo = repoStrs[4].split(".")[0]
-  url = "https://api.github.com/repos/#{owner}/#{repo}"
+  repo_name = repoStrs[4].split(".")[0]
+  url = "https://api.github.com/repos/#{owner}/#{repo_name}"
   #HTTParty.get("")
   response = HTTParty.get("#{url}/commits?client_id=#{$github_id}&client_secret=#{$github_secret}", headers: {"User-Agent" => 'gitten', "Accept" => "application/vnd.github.v3+json"})
   #puts response.body, response.code, response.message, response.headers.inspect
@@ -117,6 +134,8 @@ get "/repo/:id" do
 
   erb :repo3
 end
+
+
 
 get '/git_test' do
   @repo = Repo.last
@@ -153,4 +172,14 @@ post '/repo' do
     redirect "/repo/#{repo.id}"
   end
   json.to_json
+end
+
+peon = Rufus::Scheduler.new
+if ARGV[0] == "peon"
+  peon.in '10s' do
+    Repo.all.each do |repo|
+      gen_mews(repo)
+    end
+    puts "Work Complete"
+  end
 end

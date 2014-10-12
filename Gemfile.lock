@@ -79,6 +79,8 @@ GEM
       rack (>= 1.0)
       rack-test (~> 0.6.2)
       ripl (>= 0.7.0)
+    rufus-scheduler (3.0.9)
+      tzinfo
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -112,6 +114,7 @@ DEPENDENCIES
   rake
   require_all
   rerun
+  rufus-scheduler
   sinatra
   sinatra-activerecord
   sqlite3

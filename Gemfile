@@ -10,6 +10,7 @@ gem "tux"
 gem "bcrypt"
 gem "httparty"
 gem 'omniauth-github'
+gem 'rufus-scheduler'
 
 group :development do
   gem "sqlite3"
