@@ -199,6 +199,16 @@ post '/repo/:id/edit' do
     temp_repo.demo_link = params[:demo_url]
     temp_repo.repo_link = params[:repo_url]
     temp_repo.blurb = params[:blurb]
+    temp_repo.tags = []
+    params[:tags].split(",").each do |tag|
+      temp_tag = Tag.where(name: tag).first
+      if temp_tag
+        temp_repo.tags.push temp_tag
+      else
+        Tag.create(name: tag)
+        temp_repo.tags.push Tag.last
+      end
+    end
     temp_repo.save
     {message: "yes"}.to_json
   else

@@ -16,7 +16,7 @@
         </div>
         <div class="row">
           <div class="col-md-12" style="text-align:center">
-            <h4>Ruby, Web App</h4>
+            <h4><%= @repo.tag_string %></h4>
           </div>
         </div>
         <div class="row">
@@ -81,6 +81,7 @@
           <input type="text" name="date_location" placeholder="Date Location" class="form-control input-lg" value="<%= @repo.date_location %>">
           <input type="text" name="repo_url" placeholder="Repo Url" class="form-control input-lg" value="<%= @repo.repo_link%>">
           <input type="text" name="demo_url" placeholder="Demo Url" class="form-control input-lg" value="<%= @repo.demo_link%>">
+          <input type="text" name="tags" placeholder="Tags(ex: Ruby, Sinatra, Rake) Seperate them by commas" class="form-control input-lg" value="<%= @repo.tag_string%>">
           <textarea placeholder="blurb" name="blurb" class="form-control input-lg" rows="3"><%=  @repo.blurb %></textarea>
         </form>
       </div>

@@ -186,6 +186,7 @@ $("#edit_repo_btn").click(function(){
   json.repo_url = $(".edit_form input[name='repo_url']").val();
   json.date_location = $(".edit_form input[name='date_location']").val();
   json.blurb = $(".edit_form textarea").val();
+  json.tags = $(".edit_form input[name='tags']").val();
   $.post("/repo/"+$("#edit_repo_modal_btn").attr("repo_id")+"/edit",json,function(resp){
     location.reload();
   });
