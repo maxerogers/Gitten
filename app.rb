@@ -92,6 +92,7 @@ get "/home" do
   @test = "RWAR" #Do this to pass temp variables
   @user = session[:current_user]
   @repos = Repo.all
+  @mews = Mew.order("time_string DESC")
   erb :home, :locals => {:test => 1} #do this to pass local variables
 end
 
@@ -101,7 +102,11 @@ end
 
 get "/user/:id" do
   @user = User.find(params[:id])
+<<<<<<< HEAD
   "Hello, #{@user.user_name}!"
+=======
+  erb :profile
+>>>>>>> 146a1d8b142270616148bec8974c64c1be7d5538
 end
 
 def gen_mews(repo)
@@ -260,6 +265,37 @@ post "/comment/new" do
   else
     {message: "no"}.to_json
   end
+end
+
+put '/repo' do
+  puts params.inspect
+  json = {message: "no"}
+  repo = Repo.update(params[:id], title: params[:title], date_location: params[:location],
+  demo_link: params[:demo],  repo_link: params[:github],
+  blurb: params[:blurb],
+  user_id: session[:current_user].id )
+  puts repo.inspect
+  if repo
+    puts "I MADE A REPO!!!"
+    json[:message] = "yes"
+    redirect "/repo/#{repo.id}"
+  end
+  json.to_json
+
+end
+
+delete '/repo' do
+  puts params.inspect
+  json = {message: "no"}
+  repo = Repo.destroy(params[:id])
+  puts repo.inspect
+  if repo
+    puts "I MADE A REPO!!!"
+    json[:message] = "yes"
+    redirect "/home"
+  end
+  json.to_json
+
 end
 
 peon = Rufus::Scheduler.new

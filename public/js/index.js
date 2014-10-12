@@ -198,9 +198,6 @@ $("#delete_repo_btn").click(function(){
       window.location.href = "/home";
     }else{
       console.log("Strange Error");
-    }
-  });
-});
 
 $(".edit_form input").keyup(function(event){
     if(event.keyCode == 13){
@@ -238,4 +235,18 @@ $("#meow_textarea").keyup(function(event){
     if(event.keyCode == 13){
         $("#comment_btn").click();
     }
+});
+
+$("#repo_delete_btn").click(function(){
+  var json = {};
+  json.id = $("#repo_delete_btn").attr("repo");
+  console.log(json);
+  $.post("/repo",json,function(data){
+    var json = jQuery.parseJSON(data);
+    if(json["message"] === "yes"){
+      window.location.href = "/home"; //todo: link me to repo page pls
+    }else{
+      $(".new_repo_div").addClass("has-error");
+    }
+  });
 });
