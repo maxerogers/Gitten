@@ -11,12 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141011193958) do
+ActiveRecord::Schema.define(version: 20141011234614) do
+
+  create_table "repos", force: true do |t|
+    t.string   "title"
+    t.string   "date_location"
+    t.string   "demo_link"
+    t.string   "repo_link"
+    t.text     "blurb"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email"
     t.string   "user_name"
     t.string   "password_digest"
+    t.string   "website"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
