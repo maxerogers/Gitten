@@ -24,26 +24,11 @@
           <div class="panel panel-default">
             <div class="panel-heading">Followers Commit Feed</div>
             <table class="table">
+              <% Mew.where(repo: User.find(3).rs).each do |mew| %>
               <tr>
-                <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+                <td><strong><%= mew.get_time%></strong> <a href="/repo/<%= mew.repo.id %>"><%= mew.repo.title.capitalize %></a>-<%= mew.author%>: "<%= mew.message%>"</td>
               </tr>
-              <tr>
-                <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-              </tr>
-
-              <tr>
-                <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-              </tr>
-              <tr>
-                <td><strong>SUPER-REPO</strong> moar commit</td>
-              </tr>
-              <tr>
-                <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-              </tr>
-
-              <tr>
-                <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
-              </tr>
+              <% end %>
             </table>
           </div>
         </div>
@@ -81,23 +66,6 @@
               <table class="table">
                 <tr>
                   <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-                </tr>
-                <tr>
-                  <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-                </tr>
-
-                <tr>
-                  <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-                </tr>
-                <tr>
-                  <td><strong>SUPER-REPO</strong> moar commit</td>
-                </tr>
-                <tr>
-                  <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-                </tr>
-
-                <tr>
-                  <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
                 </tr>
               </table>
             </div>
