@@ -12,6 +12,7 @@ require_all 'models' #model loads
 
 configure do
   #use Rack::Session::Pool
+  set :bind, '0.0.0.0'
   enable :sessions
   set :session_secret, "My session secret"
   $github_id = 'c57c82472c219e5c4e6b'
