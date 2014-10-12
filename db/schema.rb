@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012002935) do
+ActiveRecord::Schema.define(version: 20141012045312) do
+
+  create_table "mews", force: true do |t|
+    t.string  "message"
+    t.string  "time_string"
+    t.integer "repo_id"
+    t.string  "author"
+  end
 
   create_table "repo_tags", force: true do |t|
     t.integer  "repo_id"

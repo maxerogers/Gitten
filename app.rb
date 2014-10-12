@@ -25,14 +25,6 @@ get '/auth/github/callback' do
     env['omniauth.auth']
 end
 
-get '/git_test' do
-  response = HTTParty.get("https://api.github.com/repos/honeycodedbear/gitter/commits?client_id=#{$github_id}&client_secret=#{$github_secret}", headers: {"User-Agent" => 'gitten', "Accept" => "application/vnd.github.v3+json"})
-  #puts response.body, response.code, response.message, response.headers.inspect
-  json = JSON.parse(response.body)
-  puts json[0]
-  "#{response.body}"
-end
-
 get '/' do
   redirect to("/home")
 end
@@ -109,7 +101,39 @@ end
 
 
 get "/repo/:id" do
-  repo = Repo.find(params[:id])
-  "Hello, #{params[:id]}!"
-  erb :repo2
+  @repo = Repo.find(params[:id])
+
+  repoStrs = @repo.repo_link.split("/")
+  owner = repoStrs[3]
+  repo = repoStrs[4].split(".")[0]
+  url = "https://api.github.com/repos/#{owner}/#{repo}"
+  #HTTParty.get("")
+  response = HTTParty.get("#{url}/commits?client_id=#{$github_id}&client_secret=#{$github_secret}", headers: {"User-Agent" => 'gitten', "Accept" => "application/vnd.github.v3+json"})
+  #puts response.body, response.code, response.message, response.headers.inspect
+  json = JSON.parse(response.body)
+
+  @commit_feeds = []
+  json
+
+  erb :repo3
+end
+
+get '/git_test' do
+  @repo = Repo.last
+  #curl -i 'https://api.github.com/repos/honeycodedbear/gitter/compare/aa5a8bd2c5f5b648ab84344ee3fe90457a3dbb25...b8262a36c765127924b5c424005a695fde02298c?client_id=5394720ddae7b4107128&client_secret=96a96f7a666b4dfa0708a881c56edac9c702dbb0'
+  #curl -i 'https://api.github.com/repos/honeycodedbear/gitter/compare/aa5a8bd2c5f5b648ab84344ee3fe90457a3dbb25...b8262a36c765127924b5c424005a695fde02298c?client_id=5394720ddae7b4107128&client_secret=96a96f7a666b4dfa0708a881c56edac9c702dbb0'
+  Mew.where(repo: @repo).delete_all
+  repoStrs = @repo.repo_link.split("/")
+  owner = repoStrs[3]
+  repo = repoStrs[4].split(".")[0]
+  url = "https://api.github.com/repos/#{owner}/#{repo}"
+  #HTTParty.get("")
+  response = HTTParty.get("#{url}/commits?client_id=#{$github_id}&client_secret=#{$github_secret}", headers: {"User-Agent" => 'gitten', "Accept" => "application/vnd.github.v3+json"})
+  #puts response.body, response.code, response.message, response.headers.inspect
+  jsons = JSON.parse(response.body)
+  jsons.each do |json|
+    Mew.create(time_string: json["commit"]["committer"]["date"], message: json["commit"]["message"], author: json["commit"]["author"]["name"], repo_id: @repo.id)
+  end
+  #"#{jsons[0]}"
+  redirect to("/repo/#{@repo.id}")
 end

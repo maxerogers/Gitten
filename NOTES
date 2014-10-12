@@ -4,3 +4,12 @@ Sinatra can return a json object with $.get will recognize as a json if you incl
 content_type :json
 
 before its submitted
+
+
+#NOTHING HELPFUL TIP
+Always make sure your in rerun. Otherwise your app server doesn't update
+
+#HELPFUL TIP #3
+use $ lsof -i TCP:4567
+and then use kill __PROCESS_ID__
+to find rogue server processes
