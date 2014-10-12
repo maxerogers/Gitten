@@ -142,3 +142,23 @@ $("#sign_up_form input").keyup(function(event){
         $("#signup_btn").click();
     }
 });
+
+
+
+$("#repo_btn").click(function(){
+  var json = {};
+  json.title = $("#repo_title").val();
+  json.location = $("#repo_location").val();
+  json.github = $("#repo_github").val();
+  json.demo = $("#repo_demo").val();
+  json.blurb = $("#repo_blurb").val();
+  console.log(json);
+  $.post("/repo",json,function(data){
+    var json = jQuery.parseJSON(data);
+    if(json["message"] === "yes"){
+      window.location.href = "/home"; //todo: link me to repo page pls
+    }else{
+      $(".new_repo_div").addClass("has-error");
+    }
+  });
+});

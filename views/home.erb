@@ -5,13 +5,17 @@
       <div class="row">
         <div class="col-md-3">
           <div class="panel panel-primary">
-            <div class="panel-heading"><%= @user.user_name %></div>
+            <div class="panel-heading"><h2><%= @user.user_name %></h2></div>
             <div class="panel-body">
-              I am Cat God. Worship. Pls.
+              <h4><%= @user.email %></h4>
               <ul>
-                <li>Username: <%= @user.user_name%></li>
-                <li> <%= test%></li>
+                <% @user.repos.each do |r| %>
+                  <li>
+                    <a href="/repo/<%= r.id %>"> <strong><%= r.title %></strong> <%= r.blurb %> </a>
+                  </li>
+                <% end %>
               </ul>
+
             </div>
           </div>
         </div>
@@ -49,40 +53,12 @@
           <div class="panel panel-default">
             <div class="panel-heading">Global Commit Feed</div>
             <table class="table">
-              <tr>
-                <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-              </tr>
-              <tr>
-                <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-              </tr>
-              <tr>
-                <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
-              </tr>
-              <tr>
-                <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-              </tr>
-              <tr>
-                <td><strong>SUPER-REPO</strong> moar commit</td>
-              </tr>
-              <tr>
-                <td><strong>PRETTY-COOL-REPO</strong> look at these commits. look at all of these commits.</td>
-              </tr>
+              <% @repos.each do |r| %>
+                <tr>
+                  <td><strong><%= r.title %></strong> <%= r.blurb %></td>
+                </tr>
+              <% end %>
 
-              <tr>
-                <td><strong>AWESOME-REPO</strong>commit commit commit commit commit commmmmmmiiiiiiiitttttt commit commit commit commit commit commmmmmmiiiiiiiitttttt </td>
-              </tr>
-              <tr>
-                <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
-              </tr>
-              <tr>
-                <td><strong>PRETTY-COOL-REPO</strong> such repo much commit</td>
-              </tr>
-              <tr>
-                <td><strong>REPO-REPO-REPO</strong> commit commit commit commit commit commmmmmmiiiiiiiitttttt repo repo repo repo repossssss repo repo repo repo repossssss </td>
-              </tr>
-              <tr>
-                <td><strong>AWESOME-REPO</strong> repo repo repo repo repossssss repo repo repo repo repossssss</td>
-              </tr>
             </table>
           </div>
 

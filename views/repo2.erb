@@ -14,19 +14,19 @@
       <div class="col-md-8">
         <div class="row" style="text-align:center">
           <div class="col-md-12">
-            <h1> Github Repo Title</h1>
-            <h2> Developer's Alias </h2>
-            <h3> Full Name + Email + Website</h3>
+            <h1> <%= @repo.title %></h1>
+            <h2> <%= @repo.user.user_name %> </h2>
+            <h3> <%= @repo.user.email %></h3>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12" style="text-align:center">
-            <h4>Super Cool Hackathon, Fall 2014</h4>
+            <h4><%= @repo.date_location %></h4>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12" style="text-align:center">
-            <h4>Ruby, Web App</h4>
+            <h4> </h4>
           </div>
         </div>
         <div class="row">
@@ -42,53 +42,9 @@
 
         <div class="row">
           <div class="col-md-12" style="text-align:center">
-            <p>Chew iPad power cord chase mice, and give attitude, so purr for no reason. Intently stare at the same spot run in circles, so bathe private parts with tongue then lick owner's face but hide when guests come over, for hopped up on catnip. Play
-              riveting piece on synthesizer keyboard intently sniff hand rub face on everything. Play riveting piece on synthesizer keyboard poop on grasses, for climb leg. Who's the baby chew iPad power cord stand in front of the computer screen, but
-              loves cheeseburgers intrigued by the shower stare at ceiling, yet behind the couch. All of a sudden cat goes crazy leave dead animals as gifts i like big cats and i can not lie hunt by meowing loudly at 5am next to human slave food dispenser
-              leave hair everywhere, for peer out window, chatter at birds, lure them to mouth and play time. </p>
+            <p><%= @repo.blurb %> </p>
           </div>
         </div>
-
-
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-          </ol>
-
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner">
-            <div class="item active">
-              <img src="http://placehold.it/350x150" alt="wow">
-              <div class="carousel-caption">
-                Look at this image.
-              </div>
-            </div>
-            <div class="item">
-              <img src="http://placehold.it/350x150" alt="image">
-              <div class="carousel-caption">
-                Yeah. Images.
-              </div>
-            </div>
-            <div class="item">
-              <img src="http://placehold.it/350x150" alt="image">
-              <div class="carousel-caption">
-                IMAGES.
-              </div>
-            </div>
-          </div>
-
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-        </div>
-
       </div>
 
       <div class="col-md-4">

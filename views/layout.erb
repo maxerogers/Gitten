@@ -9,84 +9,125 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/home">Gitten</a>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/home">Gitten</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if session[:current_user].nil? %>
+            <li>
+              <button class="btn btn-link  navbar-btn" data-toggle="modal" data-target="#myModal">
+                Login
+              </button>
+            </li>
+            <% else %>
+              <li>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#repoModal">
+                  Add Repo! :3
+                </button>
+              </li>
+              <li><a href="#"> Profile </a> </li>
+              <li><a href="/signout"> Signout</a> </li>
+              <% end %>
+        </ul>
+        <form class="navbar-form navbar-right" role="search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><span class="fa fa-search"></span>
+            </button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <!-- /.navbar-collapse -->
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <% if session[:current_user].nil? %>
-        <li><button class="btn btn-link  navbar-btn" data-toggle="modal" data-target="#myModal">
-            Login
-        </button> </li>
-        <% else %>
-        <li><a href="#"> Profile </a> </li>
-        <li><a href="/signout"> Signout</a> </li>
-        <% end %>
-      </ul>
-      <form class="navbar-form navbar-right" role="search">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
-          </span>
-        </div>
-      </form>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+    <!-- /.container-fluid -->
+  </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Welcome to Gitten</h4>
-        <%= flash[:notice] %>
-        <span class="text-danger" id="username_error_message">Username Taken</span>
-        <span class="text-danger" id="email_error_message">Email Taken</span>
-        <span class="text-danger" id="password_error_message">Passwords don't match</span>
-      </div>
-      <div class="login_form_div">
-        <form id="login_form"class="form-horizontal" role="form">
-          <div class="modal-body">
-            <input id="login_email" class="form-control input-lg" type="text" name="email" placeholder="Email/Username">
-            <input id="login_password" class="form-control input-lg" type="password" name="password" placeholder="Password">
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-default" type="button" id="switch_signup_btn">Signup?</button>
-            <button class="btn btn-primary" id= "login_btn" type="button">Login</button>
-          </div>
-        </form>
-      </div>
-      <div class="signup_form_div">
-        <form id="sign_up_form" role="form">
-          <div class="modal-body">
-            <input id="signup_email" class="form-control input-lg" type="text" name="email" placeholder="Email">
-            <input id="signup_username" class="form-control input-lg" type="text" name="username" placeholder="Username">
-            <input id="signup_password" class="form-control input-lg" type="password" name="password" placeholder="Password">
-            <input id="signup_password_confirm" class="form-control input-lg" type="password" name="password_confirm" placeholder="Password Confirm">
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-default" type="button" id="switch_login_btn">Want to Login?</button>
-            <button class="btn btn-primary" id= "signup_btn" type="button">Signup</button>
-          </div>
-        </form>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Welcome to Gitten</h4>
+          <%=flash[:notice] %>
+            <span class="text-danger" id="username_error_message">Username Taken</span>
+            <span class="text-danger" id="email_error_message">Email Taken</span>
+            <span class="text-danger" id="password_error_message">Passwords don't match</span>
+        </div>
+        <div class="login_form_div">
+          <form id="login_form" class="form-horizontal" role="form">
+            <div class="modal-body">
+              <input id="login_email" class="form-control input-lg" type="text" name="email" placeholder="Email/Username">
+              <input id="login_password" class="form-control input-lg" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" type="button" id="switch_signup_btn">Signup?</button>
+              <button class="btn btn-primary" id="login_btn" type="button">Login</button>
+            </div>
+          </form>
+        </div>
+        <div class="signup_form_div">
+          <form id="sign_up_form" role="form">
+            <div class="modal-body">
+              <input id="signup_email" class="form-control input-lg" type="text" name="email" placeholder="Email">
+              <input id="signup_username" class="form-control input-lg" type="text" name="username" placeholder="Username">
+              <input id="signup_password" class="form-control input-lg" type="password" name="password" placeholder="Password">
+              <input id="signup_password_confirm" class="form-control input-lg" type="password" name="password_confirm" placeholder="Password Confirm">
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" type="button" id="switch_login_btn">Want to Login?</button>
+              <button class="btn btn-primary" id="signup_btn" type="button">Signup</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-  <%= yield %>
+
+
+  <!-- Moar Modal -->
+  <div class="modal fade" id="repoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Let's Git Commit'n, Kitten!</h4>
+        </div>
+        <div class="new_repo_div">
+          <form id="new_repo_form" role="form">
+            <div class="modal-body">
+              <input id="repo_title" class="form-control input-lg" type="text" name="title" placeholder="Title">
+              <input id="repo_location" class="form-control input-lg" type="text" name="location" placeholder="Date/Location">
+              <input id="repo_github" class="form-control input-lg" type="url" name="github" placeholder="GitHub URL">
+              <input id="repo_demo" class="form-control input-lg" type="url" name="demo" placeholder="Demo URL">
+              <textarea id="repo_blurb" class="form-control input-lg" name="blurb" placeholder="Blurb, blurb, blurb, blah, blah, blah..."></textarea>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" id="repo_btn" type="button">GOODBYE COMMIT-MENT ISSUES!</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%=yield %>
     <script src="js/index.js"></script>
 </body>
 
