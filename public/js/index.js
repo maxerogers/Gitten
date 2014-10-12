@@ -162,3 +162,29 @@ $("#repo_btn").click(function(){
     }
   });
 });
+
+$("#follow_btn").click(function(){
+  console.log(this);
+  console.log($(this).attr("repo_id"));
+  $.post("/follow/"+$(this).attr("repo_id"),function(data){
+    console.log(data);
+    if(data["message"] === "yes"){
+      location.reload();
+    }else{
+      console.log("Strange Error");
+    }
+  });
+});
+
+$("#unfollow_btn").click(function(){
+  console.log(this);
+  console.log($(this).attr("repo_id"));
+  $.post("/unfollow/"+$(this).attr("repo_id"),function(data){
+    console.log(data);
+    if(data["message"] === "yes"){
+      location.reload();
+    }else{
+      console.log("Strange Error");
+    }
+  });
+});

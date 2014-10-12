@@ -119,6 +119,7 @@ def gen_mews(repo)
 end
 
 get "/repo/:id" do
+  @user = session[:current_user]
   @repo = Repo.find(params[:id])
   repoStrs = @repo.repo_link.split("/")
   owner = repoStrs[3]
@@ -172,6 +173,27 @@ post '/repo' do
     redirect "/repo/#{repo.id}"
   end
   json.to_json
+end
+
+post '/follow/:id' do
+  content_type :json
+  following = Following.create(u: session[:current_user], r: Repo.find(params[:id]))
+  if following
+    {message: "yes"}.to_json
+  else
+    {message: "no"}.to_json
+  end
+end
+
+post '/unfollow/:id' do
+  content_type :json
+  following = Following.where(u: session[:current_user], r: Repo.find(params[:id])).first
+  if following
+    following.delete
+    {message: "yes"}.to_json
+  else
+    {message: "no"}.to_json
+  end
 end
 
 peon = Rufus::Scheduler.new
