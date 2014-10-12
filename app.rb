@@ -95,6 +95,7 @@ end
 get "/home" do
   @test = "RWAR" #Do this to pass temp variables
   @user = session[:current_user]
+  @repos = Repo.all
   erb :home, :locals => {:test => 1} #do this to pass local variables
 end
 
@@ -112,4 +113,21 @@ get "/repo/:id" do
   repo = Repo.find(params[:id])
   "Hello, #{params[:id]}!"
   erb :repo2
+end
+
+
+post '/repo' do
+  puts params.inspect
+  json = {message: "no"}
+  repo = Repo.create(title: params[:title], date_location: params[:location],
+  demo_link: params[:demo],  repo_link: params[:github],
+  blurb: params[:blurb],
+  user_id: session[:current_user].id )
+  puts repo.inspect
+  if repo
+    puts "I MADE A REPO!!!"
+    json[:message] = "yes"
+    redirect "/repo/#{repo.id}"
+  end
+  json.to_json
 end
