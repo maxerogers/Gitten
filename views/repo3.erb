@@ -6,7 +6,15 @@
           <div class="col-md-12">
             <h1><%= @repo.title.capitalize %></h1>
             <h2><%= @repo.user.user_name.capitalize %></h2>
-            <h3> Full Name + <a href="mailto:<%= @repo.user.email%>"><%= @repo.user.email%></a> + Website</h3>
+
+              <% if @repo.user.name %>
+              <h3><%= @repo.user.name %></h3>
+              <% end %>
+            <h3>  <a href="mailto:<%= @repo.user.email%>">
+               <%= @repo.user.email%></a> </h3>
+                <% if @repo.user.website %>
+              <h3>  <a href="<%=   @repo.user.website  %>">Website</a></h3>
+                  <% end %>
           </div>
         </div>
         <div class="row">
