@@ -175,6 +175,37 @@ post '/repo' do
   json.to_json
 end
 
+put '/repo' do
+  puts params.inspect
+  json = {message: "no"}
+  repo = Repo.update(params[:id], title: params[:title], date_location: params[:location],
+  demo_link: params[:demo],  repo_link: params[:github],
+  blurb: params[:blurb],
+  user_id: session[:current_user].id )
+  puts repo.inspect
+  if repo
+    puts "I MADE A REPO!!!"
+    json[:message] = "yes"
+    redirect "/repo/#{repo.id}"
+  end
+  json.to_json
+
+end
+
+delete '/repo' do
+  puts params.inspect
+  json = {message: "no"}
+  repo = Repo.destroy(params[:id])
+  puts repo.inspect
+  if repo
+    puts "I MADE A REPO!!!"
+    json[:message] = "yes"
+    redirect "/home"
+  end
+  json.to_json
+
+end
+
 peon = Rufus::Scheduler.new
 if ARGV[0] == "peon"
   peon.in '10s' do

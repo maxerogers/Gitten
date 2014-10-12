@@ -162,3 +162,38 @@ $("#repo_btn").click(function(){
     }
   });
 });
+
+
+$("#repo_edit_btn").click(function(){
+  var json = {};
+  json.title = $("#repo_title").val();
+  json.location = $("#repo_location").val();
+  json.github = $("#repo_github").val();
+  json.demo = $("#repo_demo").val();
+  json.blurb = $("#repo_blurb").val();
+  json.id = $("#repo_delete_btn").attr("repo");
+  console.log(json);
+  $.put("/repo",json,function(data){
+    var json = jQuery.parseJSON(data);
+    if(json["message"] === "yes"){
+      window.location.href = "/home"; //todo: link me to repo page pls
+    }else{
+      $(".new_repo_div").addClass("has-error");
+    }
+  });
+});
+
+
+$("#repo_delete_btn").click(function(){
+  var json = {};
+  json.id = $("#repo_delete_btn").attr("repo");
+  console.log(json);
+  $.post("/repo",json,function(data){
+    var json = jQuery.parseJSON(data);
+    if(json["message"] === "yes"){
+      window.location.href = "/home"; //todo: link me to repo page pls
+    }else{
+      $(".new_repo_div").addClass("has-error");
+    }
+  });
+});

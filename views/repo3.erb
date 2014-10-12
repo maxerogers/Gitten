@@ -43,6 +43,9 @@
         <div class="row">
           <div class="col-md-12" style="text-align:center">
             <p><%= @repo.blurb %></p>
+            <p><button class="btn btn-default" data-toggle="modal" data-target="#editRepoModal">
+              Edit This Repo
+            </button><p>
           </div>
         </div>
 
@@ -64,7 +67,33 @@
     </div>
 
 
+<!-- Moar Modal -->
+<div class="modal fade" id="editRepoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Let's Git Commit'n, Kitten!</h4>
+      </div>
+      <div class="new_repo_div">
+        <form id="new_repo_form" role="form">
+          <div class="modal-body">
+            <input id="repo_title" class="form-control input-lg" type="text" name="title" placeholder="<%= @repo.title %>">
+            <input id="repo_location" class="form-control input-lg" type="text" name="location" placeholder="<%= @repo.date_location %>">
+            <input id="repo_demo" class="form-control input-lg" type="url" name="demo" placeholder="<%= @repo.demo_link %>">
+            <textarea id="repo_blurb" class="form-control input-lg" name="blurb" placeholder="<%= @repo.blurb %>"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" id="repo_delete_btn" repo="<%= @repo.id %>" type="button">DELETE THIS REPO</button>
 
+            <button class="btn btn-primary" id="repo_edit_btn" repo="<%= @repo.id %>" type="button">OK</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
   </div>
 
