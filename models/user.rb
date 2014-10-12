@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   has_many :repos
   has_many :followings, foreign_key: "u_id"
   has_many :rs, through: :followings #these are the repos that you are following
+  has_many :comments
 end

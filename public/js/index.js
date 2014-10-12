@@ -207,3 +207,35 @@ $(".edit_form input").keyup(function(event){
         $("#edit_repo_btn").click();
     }
 });
+
+$("#collapse_comment_btn").click(function(){
+  $("#comment_feed").hide();
+  $("#uncollapse_comment_btn").show();
+  $("#collapse_comment_btn").hide();
+});
+
+$("#uncollapse_comment_btn").hide();
+$("#uncollapse_comment_btn").click(function(){
+  $("#comment_feed").show();
+  $("#uncollapse_comment_btn").hide();
+  $("#collapse_comment_btn").show();
+});
+
+$("#comment_btn").click(function(){
+  var json = {};
+  json.message = $("#meow_textarea").val();
+  json.repo = $(this).attr("repo_id");
+  $.post("/comment/new",json,function(resp){
+    if(resp["message"] !== "no"){
+      location.reload();
+    }else{
+      console.log("Strange Error");
+    }
+  });
+});
+
+$("#meow_textarea").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#comment_btn").click();
+    }
+});

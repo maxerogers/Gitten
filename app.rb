@@ -251,6 +251,16 @@ post "/search" do
   @mews = []
   erb :search
 end
+
+post "/comment/new" do
+  content_type :json
+  if Comment.create(user: session[:current_user], repo: Repo.find(params[:repo]), message: params[:message])
+    {message: "yes"}.to_json
+  else
+    {message: "no"}.to_json
+  end
+end
+
 peon = Rufus::Scheduler.new
 if ARGV[0] == "peon"
   peon.in '10s' do

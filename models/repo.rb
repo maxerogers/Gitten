@@ -5,7 +5,8 @@ class Repo < ActiveRecord::Base
   has_many :mews
   has_many :followings, foreign_key: "r_id"
   has_many :us, through: :followings #These are the users that are following you
-
+  has_many :comments
+  
   def tag_string
     str = ""
     self.tags.each do |t|

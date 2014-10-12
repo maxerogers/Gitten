@@ -43,7 +43,33 @@
           </div>
         </div>
 
-
+        <div class="row">
+          <div class="col-md-12" style="text-align:center">
+            <div class="panel panel-default">
+              <div class="panel-heading">Comments <button style="float:right;" id="collapse_comment_btn" class="btn btn-warning btn-sm"> <i class="fa fa-caret-square-o-down"></i></button>
+                <button style="float:right;" id="uncollapse_comment_btn" class="btn btn-warning btn-sm"> <i class="fa fa-caret-square-o-up"></i></button></div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <% if @user %>
+                    <td> <div class="input-group">
+                        <textarea  class="form-control custom-control" id="meow_textarea" rows="3" style="resize:none" placeholder="Meow"></textarea>
+                        <span repo_id="<%= @repo.id%>" id="comment_btn" class="input-group-addon btn btn-primary meow_btn">Meow</span>
+                    </div> </td>
+                    <% end %>
+                  </tr>
+                </thead>
+                <tbody id="comment_feed">
+                <% @repo.comments.each do |comment| %>
+                  <tr>
+                    <td> <%= comment.user.user_name %> : <%= comment.message %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
 
       </div>
