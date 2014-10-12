@@ -25,6 +25,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          <li> <a href="/about"> About </a> </li>
           <% if session[:current_user].nil? %>
             <li>
               <button class="btn btn-link  navbar-btn" data-toggle="modal" data-target="#myModal">
@@ -37,16 +38,17 @@
                   Add Repo! :3
                 </button>
               </li>
-              <li><a href="/about"> About </a> </li>
               <li><a href="/signout"> Signout</a> </li>
               <% end %>
         </ul>
+
         <form class="navbar-form navbar-right" action="/search" method="post" role="search">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search" name="search">
             <span class="input-group-btn">
             <button class="btn btn-default"><span class="fa fa-search"></span>
             </button>
+
             </span>
           </div>
         </form>
