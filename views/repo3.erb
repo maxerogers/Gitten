@@ -94,7 +94,7 @@
           <table class="table">
             <% @repo.mews.each do |mew| %>
               <tr>
-                <td><strong><%= mew.get_time%></strong> <%= @repo.title.capitalize %>-<%= mew.author%>: "<%= mew.message%>"</td>
+                <td><strong><%= mew.get_time%></strong> <a href="/repo/<%= @repo.id %>"><%= @repo.title.capitalize %></a>-<%= mew.author%>: "<%= mew.message%>"</td>
               </tr>
             <% end %>
           </table>
