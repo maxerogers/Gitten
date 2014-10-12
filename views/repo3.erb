@@ -24,12 +24,14 @@
             <div class="btn-group">
               <a href="<%= @repo.demo_link%>" type="button" class="btn btn-primary"> Demo </a>
               <a href="<%= @repo.repo_link%>" type="button" class="btn btn-info"> Repo </a>
-              <% if @user == @repo.user %>
-              <button disabled type="button" class="btn btn-success"> Follow <span class="badge"><%= @repo.us.count%></span></button>
-              <% elsif @repo.us.where(id: @user.id).empty? %>
-              <button type="button" repo_id="<%=@repo.id%>" id="follow_btn" class="btn btn-success"> Follow <span class="badge"><%= @repo.us.count%></span></button>
-              <% else %>
-              <button type="button" repo_id="<%=@repo.id%>" id="unfollow_btn" class="btn btn-danger"> Unfollow <span class="badge"><%= @repo.us.count%></span></button>
+              <% if session[:current_user] %>
+                <% if @user == @repo.user %>
+                <button type="button" repo_id="<%=@repo.id%>" id="edit_repo_modal_btn" data-toggle="modal" data-target="#edit_repo_modal" class="btn btn-success"> Edit <span class="badge"><%= @repo.us.count%></span></button>
+                <% elsif @repo.us.where(id: @user.id).empty? %>
+                <button type="button" repo_id="<%=@repo.id%>" id="follow_btn" class="btn btn-success"> Follow <span class="badge"><%= @repo.us.count%></span></button>
+                <% else %>
+                <button type="button" repo_id="<%=@repo.id%>" id="unfollow_btn" class="btn btn-danger"> Unfollow <span class="badge"><%= @repo.us.count%></span></button>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -65,3 +67,28 @@
 
 
   </div>
+
+  <div class="modal fade" id="edit_repo_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Repo Form</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" class="edit_form">
+          <input type="text" name="title" placeholder="Title" class="form-control input-lg" value="<%= @repo.title.capitalize%>">
+          <input type="text" name="date_location" placeholder="Date Location" class="form-control input-lg" value="<%= @repo.date_location %>">
+          <input type="text" name="repo_url" placeholder="Repo Url" class="form-control input-lg" value="<%= @repo.repo_link%>">
+          <input type="text" name="demo_url" placeholder="Demo Url" class="form-control input-lg" value="<%= @repo.demo_link%>">
+          <textarea placeholder="blurb" name="blurb" class="form-control input-lg" rows="3"><%=  @repo.blurb %></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="delete_repo_btn" class="btn btn-danger" style="float:left;">Delete</button>
+        <button type="button" id="edit_repo_btn" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

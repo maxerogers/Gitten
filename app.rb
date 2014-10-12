@@ -98,7 +98,7 @@ end
 
 get "/user/:id" do
   @user = User.find(params[:id])
-  "Hello, #{user.user_name}!"
+  "Hello, #{@user.user_name}!"
 end
 
 def gen_mews(repo)
@@ -190,6 +190,21 @@ post '/unfollow/:id' do
   following = Following.where(u: session[:current_user], r: Repo.find(params[:id])).first
   if following
     following.delete
+    {message: "yes"}.to_json
+  else
+    {message: "no"}.to_json
+  end
+end
+
+post '/repo/:id/edit' do
+  temp_repo = Repo.find(params[:id])
+  if temp_repo
+    temp_repo.title = params[:title]
+    temp_repo.date_location = params[:date_location]
+    temp_repo.demo_link = params[:demo_url]
+    temp_repo.repo_link = params[:repo_url]
+    temp_repo.blurb = params[:blurb]
+    temp_repo.save
     {message: "yes"}.to_json
   else
     {message: "no"}.to_json

@@ -41,7 +41,6 @@ $("#sign_up_form .modal-body input[name='username']").focusout(function(){
 });
 
 function check_passwords(){
-  console.log("RWAR");
   if($("#sign_up_form .modal-body input[name='password']").val() === $("#sign_up_form .modal-body input[name='password_confirm']").val()){
     $("#password_error_message").hide();
     password_okay = true;
@@ -97,7 +96,6 @@ $("#login_btn").click(function(){
   var json = {};
   json.email = $("#login_email").val();
   json.password = $("#login_password").val();
-  console.log(json);
   $.post("/login",json,function(data){
     var json = jQuery.parseJSON(data);
     if(json["message"] === "yes"){
@@ -109,7 +107,6 @@ $("#login_btn").click(function(){
 });
 
 $("#switch_signup_btn").click(function(){
-  console.log("RWAR");
   $(".login_form_div").hide();
   $(".signup_form_div").show();
   $("#email_error_message").hide();
@@ -152,7 +149,6 @@ $("#repo_btn").click(function(){
   json.github = $("#repo_github").val();
   json.demo = $("#repo_demo").val();
   json.blurb = $("#repo_blurb").val();
-  console.log(json);
   $.post("/repo",json,function(data){
     var json = jQuery.parseJSON(data);
     if(json["message"] === "yes"){
@@ -164,10 +160,7 @@ $("#repo_btn").click(function(){
 });
 
 $("#follow_btn").click(function(){
-  console.log(this);
-  console.log($(this).attr("repo_id"));
   $.post("/follow/"+$(this).attr("repo_id"),function(data){
-    console.log(data);
     if(data["message"] === "yes"){
       location.reload();
     }else{
@@ -177,14 +170,23 @@ $("#follow_btn").click(function(){
 });
 
 $("#unfollow_btn").click(function(){
-  console.log(this);
-  console.log($(this).attr("repo_id"));
   $.post("/unfollow/"+$(this).attr("repo_id"),function(data){
-    console.log(data);
     if(data["message"] === "yes"){
       location.reload();
     }else{
       console.log("Strange Error");
     }
+  });
+});
+
+$("#edit_repo_btn").click(function(){
+  var json = {};
+  json.title = $(".edit_form input[name='title']").val();
+  json.demo_url = $(".edit_form input[name='demo_url']").val();
+  json.repo_url = $(".edit_form input[name='repo_url']").val();
+  json.date_location = $(".edit_form input[name='date_location']").val();
+  json.blurb = $(".edit_form textarea").val();
+  $.post("/repo/"+$("#edit_repo_modal_btn").attr("repo_id")+"/edit",json,function(resp){
+    location.reload();
   });
 });

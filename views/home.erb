@@ -24,7 +24,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">Followers Commit Feed</div>
             <table class="table">
-              <% Mew.where(repo: User.find(3).rs).each do |mew| %>
+              <% Mew.where(repo: User.find(3).rs).order("time_string DESC").each do |mew| %>
               <tr>
                 <td><strong><%= mew.get_time%></strong> <a href="/repo/<%= mew.repo.id %>"><%= mew.repo.title.capitalize %></a>-<%= mew.author%>: "<%= mew.message%>"</td>
               </tr>
@@ -38,10 +38,10 @@
           <div class="panel panel-default">
             <div class="panel-heading">Global Commit Feed</div>
             <table class="table">
-              <% @repos.each do |r| %>
-                <tr>
-                  <td><strong><%= r.title %></strong> <%= r.blurb %></td>
-                </tr>
+              <% Mew.order("time_string DESC").each do |mew| %>
+              <tr>
+                <td><strong><%= mew.get_time%></strong> <a href="/repo/<%= mew.repo.id %>"><%= mew.repo.title.capitalize %></a>-<%= mew.author%>: "<%= mew.message%>"</td>
+              </tr>
               <% end %>
 
             </table>
@@ -64,9 +64,11 @@
             <div class="panel panel-default">
               <div class="panel-heading">Global Commit Feed</div>
               <table class="table">
+                <% Mew.order("time_string DESC").each do |mew| %>
                 <tr>
-                  <td><strong>SUPER-REPO</strong> wow much commit yeah man</td>
+                  <td><strong><%= mew.get_time%></strong> <a href="/repo/<%= mew.repo.id %>"><%= mew.repo.title.capitalize %></a>-<%= mew.author%>: "<%= mew.message%>"</td>
                 </tr>
+                <% end %>
               </table>
             </div>
           </div>
