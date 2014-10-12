@@ -89,6 +89,7 @@ get "/home" do
   @test = "RWAR" #Do this to pass temp variables
   @user = session[:current_user]
   @repos = Repo.all
+  @mews = Mew.order("time_string DESC")
   erb :home, :locals => {:test => 1} #do this to pass local variables
 end
 
@@ -98,7 +99,7 @@ end
 
 get "/user/:id" do
   @user = User.find(params[:id])
-  "Hello, #{user.user_name}!"
+  erb :profile
 end
 
 def gen_mews(repo)

@@ -53,9 +53,9 @@
           <div class="panel panel-default">
             <div class="panel-heading">Global Commit Feed</div>
             <table class="table">
-              <% @repos.each do |r| %>
+              <% @mews.each do |mew| %>
                 <tr>
-                  <td><strong><%= r.title %></strong> <%= r.blurb %></td>
+                  <td><strong><%= mew.get_time%></strong> <a href="/repo/<%= mew.repo.id %>"><%= mew.repo.title.capitalize %></a>-<%= mew.author%>: "<%= mew.message%>"</td>
                 </tr>
               <% end %>
 
