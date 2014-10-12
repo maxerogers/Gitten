@@ -38,6 +38,10 @@ get "/repo" do
   erb :repo
 end
 
+get "/about" do
+  erb :about
+end
+
 post '/login' do
   puts params.inspect
   json = {message: "no"}
