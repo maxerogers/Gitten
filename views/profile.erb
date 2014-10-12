@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2><%= @user.user_name %></h2>
+      <% if @user.name %>
+        <h3><%= @user.name %></h3>
+      <% end %>
+      <h3><%= @user.email %></h3>
+      <% if @user.website %>
+        <h3><a href="<%= @user.website %>"><%= @user.website %></a></h3>
+      <% end %>
+    </div>
+    <div class="col-md-9">
+      <table>
+        <% @user.repos.each do |r| %>
+          <tr>
+            <td><a href="/repo/<%= r.id %>"> <strong><%= r.title %></strong></a> <br />
+              <%= r.date_location %> <br />
+              <a href="<%= r.repo_link %>">GitHub</a> <a href="<%= r.demo_link %>">Demo</a> <br />
+              <%= r.blurb %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+
+</div>
