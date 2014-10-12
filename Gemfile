@@ -8,6 +8,8 @@ gem 'json'
 gem 'require_all'
 gem "tux"
 gem "bcrypt"
+gem "httparty"
+gem 'omniauth-github'
 
 group :development do
   gem "sqlite3"

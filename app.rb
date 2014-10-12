@@ -4,13 +4,33 @@ require 'json'
 require 'require_all'
 require 'sinatra/activerecord'
 require 'bcrypt'
+require 'omniauth-github'
+require 'httparty'
 require_all 'config' #database configuration
 require_all 'models' #model loads
 
 configure do
   enable :sessions
   set :session_secret, "My session secret"
+  $github_id = 'c57c82472c219e5c4e6b'
+  $github_secret = '4c4b45a2bc3ccd12b73860a204834382662035d9'
   use Rack::Flash
+  use OmniAuth::Builder do
+    #I know this bad form but I haven't deployed yet. So Shhhhhhhh
+    provider :github, $github_id, $github_secret
+  end
+end
+
+get '/auth/github/callback' do
+    env['omniauth.auth']
+end
+
+get '/git_test' do
+  response = HTTParty.get("https://api.github.com/repos/honeycodedbear/gitter/commits?client_id=#{$github_id}&client_secret=#{$github_secret}", headers: {"User-Agent" => 'gitten', "Accept" => "application/vnd.github.v3+json"})
+  #puts response.body, response.code, response.message, response.headers.inspect
+  json = JSON.parse(response.body)
+  puts json[0]
+  "#{response.body}"
 end
 
 get '/' do
@@ -71,7 +91,9 @@ end
 
 
 get "/home" do
-  erb :home
+  @test = "RWAR" #Do this to pass temp variables
+  @user = session[:current_user]
+  erb :home, :locals => {:test => 1} #do this to pass local variables
 end
 
 get "/repo2" do
