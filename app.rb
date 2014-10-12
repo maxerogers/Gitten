@@ -102,11 +102,8 @@ end
 
 get "/user/:id" do
   @user = User.find(params[:id])
-<<<<<<< HEAD
   "Hello, #{@user.user_name}!"
-=======
   erb :profile
->>>>>>> 146a1d8b142270616148bec8974c64c1be7d5538
 end
 
 def gen_mews(repo)

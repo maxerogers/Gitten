@@ -125,9 +125,9 @@ $("#switch_login_btn").click(function(){
 $(".signup_form_div").hide();
 
 $("#login_password").keyup(function(event){
-  if(event.keyCode == 13){
-    $("#login_btn").click();
-  }
+    if(event.keyCode == 13){
+        $("#login_btn").click();
+    }
 });
 
 $("#email_error_message").hide();
@@ -135,9 +135,9 @@ $("#username_error_message").hide();
 $("#password_error_message").hide();
 
 $("#sign_up_form input").keyup(function(event){
-  if(event.keyCode == 13){
-    $("#signup_btn").click();
-  }
+    if(event.keyCode == 13){
+        $("#signup_btn").click();
+    }
 });
 
 
@@ -203,9 +203,9 @@ $("#delete_repo_btn").click(function(){
 });
 
 $(".edit_form input").keyup(function(event){
-  if(event.keyCode == 13){
-    $("#edit_repo_btn").click();
-  }
+    if(event.keyCode == 13){
+        $("#edit_repo_btn").click();
+    }
 });
 
 $("#collapse_comment_btn").click(function(){
@@ -235,9 +235,9 @@ $("#comment_btn").click(function(){
 });
 
 $("#meow_textarea").keyup(function(event){
-  if(event.keyCode == 13){
-    $("#comment_btn").click();
-  }
+    if(event.keyCode == 13){
+        $("#comment_btn").click();
+    }
 });
 
 $("#repo_delete_btn").click(function(){
@@ -245,11 +245,11 @@ $("#repo_delete_btn").click(function(){
   json.id = $("#repo_delete_btn").attr("repo");
   console.log(json);
   $.post("/repo",json,function(data){
-    var json = jQuery.parseJSON(data);
-    if(json["message"] === "yes"){
-      window.location.href = "/home"; //todo: link me to repo page pls
-    }else{
-      $(".new_repo_div").addClass("has-error");
-    }
+      var json = jQuery.parseJSON(data);
+      if(json["message"] === "yes"){
+        window.location.href = "/home"; //todo: link me to repo page pls
+      }else{
+        $(".new_repo_div").addClass("has-error");
+      }
   });
 });
