@@ -149,12 +149,12 @@ $("#repo_btn").click(function(){
   json.github = $("#repo_github").val();
   json.demo = $("#repo_demo").val();
   json.blurb = $("#repo_blurb").val();
-  $.post("/repo",json,function(data){
-    var json = jQuery.parseJSON(data);
-    if(json["message"] === "yes"){
-      window.location.href = "/home"; //todo: link me to repo page pls
+  $.post("/repo",json,function(resp){
+    if(resp["message"] !== "no"){
+      var url = "/repo/"+resp["message"]+"";
+      window.location.href = url;
     }else{
-      $(".new_repo_div").addClass("has-error");
+      console.log("BAD FORM");
     }
   });
 });
@@ -188,5 +188,15 @@ $("#edit_repo_btn").click(function(){
   json.blurb = $(".edit_form textarea").val();
   $.post("/repo/"+$("#edit_repo_modal_btn").attr("repo_id")+"/edit",json,function(resp){
     location.reload();
+  });
+});
+
+$("#delete_repo_btn").click(function(){
+  $.post("/repo/"+$(this).attr("repo_id")+"/delete",function(data){
+    if(data["message"] === "yes"){
+      window.location.href = "/home";
+    }else{
+      console.log("Strange Error");
+    }
   });
 });

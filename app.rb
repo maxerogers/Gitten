@@ -104,7 +104,6 @@ end
 def gen_mews(repo)
   #curl -i 'https://api.github.com/repos/honeycodedbear/gitter/compare/aa5a8bd2c5f5b648ab84344ee3fe90457a3dbb25...b8262a36c765127924b5c424005a695fde02298c?client_id=5394720ddae7b4107128&client_secret=96a96f7a666b4dfa0708a881c56edac9c702dbb0'
   #curl -i 'https://api.github.com/repos/honeycodedbear/gitter/compare/aa5a8bd2c5f5b648ab84344ee3fe90457a3dbb25...b8262a36c765127924b5c424005a695fde02298c?client_id=5394720ddae7b4107128&client_secret=96a96f7a666b4dfa0708a881c56edac9c702dbb0'
-  Mew.where(repo: repo).delete_all
   repoStrs = repo.repo_link.split("/")
   owner = repoStrs[3]
   repo_name = repoStrs[4].split(".")[0]
@@ -158,21 +157,14 @@ get '/git_test' do
   redirect to("/repo/#{@repo.id}")
 end
 
-
 post '/repo' do
-  puts params.inspect
-  json = {message: "no"}
-  repo = Repo.create(title: params[:title], date_location: params[:location],
-  demo_link: params[:demo],  repo_link: params[:github],
-  blurb: params[:blurb],
-  user_id: session[:current_user].id )
-  puts repo.inspect
-  if repo
-    puts "I MADE A REPO!!!"
-    json[:message] = "yes"
-    redirect "/repo/#{repo.id}"
+  content_type :json
+  if Repo.create(user: session[:current_user], blurb: params[:blurb], demo_link: params[:demo],
+                  repo_link: params[:github], date_location: params[:location], title: params[:title])
+    {message: "#{Repo.last.id}"}.to_json
+  else
+    {message: "no"}.to_json
   end
-  json.to_json
 end
 
 post '/follow/:id' do
@@ -197,6 +189,7 @@ post '/unfollow/:id' do
 end
 
 post '/repo/:id/edit' do
+  content_type :json
   temp_repo = Repo.find(params[:id])
   if temp_repo
     temp_repo.title = params[:title]
@@ -211,9 +204,21 @@ post '/repo/:id/edit' do
   end
 end
 
+post '/repo/:id/delete' do
+  content_type :json
+  temp_repo = Repo.find(params[:id])
+  unless temp_repo.nil? && temp_repo.user.id != session[:current_user].id
+    temp_repo.delete
+    {message: "yes"}.to_json
+  else
+    {message: "no"}.to_json
+  end
+end
+
 peon = Rufus::Scheduler.new
 if ARGV[0] == "peon"
   peon.in '10s' do
+    Mew.delete_all
     Repo.all.each do |repo|
       gen_mews(repo)
     end
