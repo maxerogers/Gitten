@@ -7,13 +7,16 @@ require 'bcrypt'
 require 'omniauth-github'
 require 'httparty'
 require 'rufus-scheduler'
+require 'rack-session-mongo'
+require 'thin'
 require_all 'config' #database configuration
 require_all 'models' #model loads
 
 configure do
   #use Rack::Session::Pool
   set :bind, '0.0.0.0'
-  enable :sessions
+  #enable :sessions
+  use Rack::Session::Mongo
   set :session_secret, "My session secret"
   $github_id = 'c57c82472c219e5c4e6b'
   $github_secret = '4c4b45a2bc3ccd12b73860a204834382662035d9'
@@ -24,7 +27,9 @@ configure do
   end
 end
 
-after { ActiveRecord::Base.connection.close }
+after do
+  ActiveRecord::Base.connection.close
+end
 
 get '/auth/github/callback' do
     env['omniauth.auth']
@@ -249,7 +254,7 @@ post "/search" do
     if @repos.nil?
       @repos = r
     else
-      @repos.concat r
+      @repos.concat r #this is what probably ruined my skill-based search.. This doesn't add them just to the collection proxy it saves them into the database....weird
     end
   end
   @repos = @repos.uniq
@@ -301,7 +306,8 @@ delete '/repo' do
 end
 
 peon = Rufus::Scheduler.new
-if ARGV[0] == "peon"
+#if ARGV[0] == "peon"
+if true
   peon.in '10s' do
     Mew.delete_all
     Repo.all.each do |repo|
