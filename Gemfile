@@ -11,7 +11,8 @@ gem "bcrypt"
 gem "httparty"
 gem 'omniauth-github'
 gem 'rufus-scheduler'
-
+gem 'rack-session-mongo'
+gem 'thin'
 group :development do
   gem "sqlite3"
   gem "rerun"

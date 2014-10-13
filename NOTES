@@ -18,3 +18,10 @@ to find rogue server processes
 When using rufus to run a demon make sure to 1. increase the available database pool
 2. user Rack::Session::Pool instead of enable: :sessions
 It has avoided the 'Cookie over 4k' error I was getting
+
+
+#Tip #5
+MonogoDB can be used to store our session data. It is as simple as installing the app
+and use Rack::Session::Mongo
+Another neat side note to stop the activerecord connection failure add this to the config.ru
+use ActiveRecord::ConnectionAdapters::ConnectionManagement

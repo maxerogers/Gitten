@@ -18,5 +18,5 @@ end
 
 configure :development do
 	set :database, {adapter: "sqlite3", database: "db/database.sqlite3"}
-	set :database_extras, {:pool => 25, :timeout => 6000}
+	set :database_extras, {:pool => 25, :timeout => 10000}
 end
